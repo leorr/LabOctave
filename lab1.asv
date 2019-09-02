@@ -1,0 +1,53 @@
+clear;
+clc;
+close all;
+
+t= -100 : 0.05 : 100.5;
+n= length(t);
+g=sinc(t);
+T=0.05;
+figure
+plot(t,g);
+
+G=fftlab(g);
+f=linspace(-10,10,n);
+
+figure
+plot(f,abs(G).*T);
+
+fs=1/0.05;
+pwelch(g,[ ],[ ],n,fs);
+
+%%
+
+clear;
+clc;
+close all;
+
+t= -100 : 0.05 : 99.95;
+n= length(t);
+g=cos(2.*pi.*t+pi./4)+2.*sin(2.*pi.*2.*t)+3.*cos(2.*pi.*3.*t-pi./4);
+T=0.05;
+figure
+plot(t,g,'-+');
+xlim([-2 2]);
+G=fftlab(g)/n;
+f=linspace(-10,10,n);
+
+E=sum(n).*g^2.*0.05;
+
+figure
+plot(f,abs(G).*T);
+
+fs=1/0.05;
+pwelch(g,[ ],[ ],n,fs);
+
+
+
+
+
+
+
+
+
+
